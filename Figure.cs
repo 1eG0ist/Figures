@@ -1,6 +1,8 @@
-namespace Figures;
-
-public interface Figure
+namespace Figures
 {
-    
+    public interface IFigure
+    {
+        public float CalcSquare();
+        public float CalcPerimeter();
+    }    
 }

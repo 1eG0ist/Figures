@@ -10,25 +10,24 @@ namespace Figures
     
     public class Rectangle : IFigure
     {
-        private List<float[]> points = new List<float[]>();
+        private float[][] points = new float[4][];
 
         public Rectangle(float[] points)
         {
-            for (int i = 0; i < points.Length; i += 2)
+            for (int i = 0; i < points.Length/2; i++)
             {
-                this.points.Add(new float[] {points[i], points[i+1]});
+                this.points[i] = new float[] {points[i*2], points[i*2+1]};
             }
         }
 
         public float CalcSquare()
         {
-            return 2f;
+            return (points[1][1] - points[0][1]) * (points[2][0] - points[1][0]);
         }
 
         public float CalcPerimeter()
         {
-            return  (points[1][1] - points[0][1]) + (points[2][0] - points[1][0]) + (points[2][1] - points[3][0]) +
-                      (points[3][0] - points[0][0]);
+            return  (points[1][1] - points[0][1] + points[2][0] - points[1][0]) * 2;
         }
     }    
 }
