@@ -11,14 +11,19 @@ namespace Figures
             radius = info[2];
         }
 
-        public float CalcSquare()
+        private float CalcSquare()
         {
             return (float)(Math.PI * Math.Pow(radius, 2));
         }
 
-        public float CalcPerimeter()
+        private float CalcPerimeter()
         {
             return (float)(2 * Math.PI * radius);
+        }
+        
+        public string ShowInfo()
+        {
+            return $"Perimeter - {CalcPerimeter()}, Square - {CalcSquare()}";
         }
     }
 };

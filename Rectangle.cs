@@ -20,14 +20,19 @@ namespace Figures
             }
         }
 
-        public float CalcSquare()
+        private float CalcSquare()
         {
             return (points[1][1] - points[0][1]) * (points[2][0] - points[1][0]);
         }
 
-        public float CalcPerimeter()
+        private float CalcPerimeter()
         {
             return  (points[1][1] - points[0][1] + points[2][0] - points[1][0]) * 2;
+        }
+
+        public string ShowInfo()
+        {
+            return $"Perimeter - {CalcPerimeter()}, Square - {CalcSquare()}";
         }
     }    
 }

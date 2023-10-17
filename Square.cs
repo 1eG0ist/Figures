@@ -12,14 +12,19 @@ namespace Figures
             }
         }
 
-        public float CalcSquare()
+        private float CalcSquare()
         {
             return (float)Math.Pow(points[1][1] - points[0][1], 2);
         }
 
-        public float CalcPerimeter()
+        private float CalcPerimeter()
         {
             return (points[1][1] - points[0][1]) * 4;
+        }
+        
+        public string ShowInfo()
+        {
+            return $"Perimeter - {CalcPerimeter()}, Square - {CalcSquare()}";
         }
     }
 };

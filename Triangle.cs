@@ -19,14 +19,14 @@ namespace Figures
             }
         }
         
-        public float CalcSquare()
+        private float CalcSquare()
         {
             float[] sides = CalcSides();
             float p = CalcPerimeter() / 2;
             return (float)Math.Sqrt(p * (p-sides[0]) * (p-sides[1]) * (p-sides[2]));
         }
 
-        public float CalcPerimeter()
+        private float CalcPerimeter()
         {
             return CalcSides().Sum();
         }
@@ -40,6 +40,11 @@ namespace Figures
                 (float)Math.Sqrt(Math.Pow(points[2][0] - points[0][0], 2) + Math.Pow(points[2][1] - points[0][1], 2))
             };
             return sides;
+        }
+        
+        public string ShowInfo()
+        {
+            return $"Perimeter - {CalcPerimeter()}, Square - {CalcSquare()}";
         }
     }
 };
