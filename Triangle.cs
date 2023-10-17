@@ -31,7 +31,7 @@ namespace Figures
             return CalcSides().Sum();
         }
 
-        public float[] CalcSides()
+        private float[] CalcSides()
         {
             float[] sides = new float[]
             {
