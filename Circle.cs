@@ -2,13 +2,12 @@ namespace Figures
 {
     public class Circle : IFigure
     {
-        private float[] center;
         private float radius;
     
-        public Circle(float[] info)
+        public Circle(float rad)
         {
-            center = new float[] { info[0], info[1] };
-            radius = info[2];
+            radius = rad;
+            Console.WriteLine($"radius - {rad}");
         }
 
         private float CalcSquare()

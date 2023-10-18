@@ -2,10 +2,11 @@ namespace Figures
 {
     public class Pyramid : IFigure
     {
-        private bool is_triangle_bottom;
+        private int which_bottom; // 0 - triangle, 1 - square/rectangle, 2 - circle
         private float[][] points;
         private float[] center = new float[2];
         private float height;
+        private float radius; 
         
         public Pyramid(float[] points, float height)
         {
@@ -16,20 +17,25 @@ namespace Figures
                 {
                     this.points[i] = new float[] { points[i * 2], points[i * 2 + 1] };
                 }
-                is_triangle_bottom = true;
+                which_bottom = 0;
                 center[0] = (points[0] + points[2] + points[4]) / 3;
                 center[1] = (points[1] + points[3] + points[5]) / 3;
             }
-            else
+            else if (points.Length == 8)
             {
                 this.points = new float[4][];
                 for (int i = 0; i < points.Length/2; i++)
                 {
                     this.points[i] = new float[] { points[i * 2], points[i * 2 + 1] };
                 }
-                is_triangle_bottom = false;
+                which_bottom = 1;
                 center[0] = (points[3] - points[1]) / 2;
                 center[1] = (points[0] - points[6]) / 2;
+            }
+            else
+            {
+                radius = points[0];
+                which_bottom = 2;
             }
 
             this.height = height;
@@ -37,7 +43,7 @@ namespace Figures
 
         private float CalcSquare()
         {
-            if (is_triangle_bottom)
+            if (which_bottom == 0)
             {
                 float[] sides = new float[]
                 {
@@ -56,20 +62,26 @@ namespace Figures
                 float s3 = (float)Math.Sqrt(p3 * (p3-sides[2]) * (p3-diags[0]) * (p3-diags[2]));
                 return s + s1 + s2 + s3;
             }
-
-            float side_1 = Math.Abs(points[1][1] - points[0][1]);
-            float side_2 = Math.Abs(points[2][0] - points[1][0]);
-            float diag = CalcRectSquareDiag();
-            float p11 = (side_1 + diag * 2) / 2;
-            float p22 = (side_2 + diag * 2) / 2;
-            float s11 = (float)Math.Sqrt(p11 * (p11 - side_1) * (p11 - diag) * (p11 - diag));
-            float s22 = (float)Math.Sqrt(p22 * (p22 - side_2) * (p22 - diag) * (p22 - diag));
-            return side_1 * side_2 + s11 * 2 + s22 * 2;
+            
+            if (which_bottom == 1)
+            {
+                float side_1 = Math.Abs(points[1][1] - points[0][1]);
+                float side_2 = Math.Abs(points[2][0] - points[1][0]);
+                float diag = CalcRectSquareDiag();
+                float p11 = (side_1 + diag * 2) / 2;
+                float p22 = (side_2 + diag * 2) / 2;
+                float s11 = (float)Math.Sqrt(p11 * (p11 - side_1) * (p11 - diag) * (p11 - diag));
+                float s22 = (float)Math.Sqrt(p22 * (p22 - side_2) * (p22 - diag) * (p22 - diag));
+                return side_1 * side_2 + s11 * 2 + s22 * 2;
+            }
+            
+            float l = (float)Math.Sqrt(Math.Pow(radius, 2) + Math.Pow(height, 2));
+            return (float)(Math.PI * l * radius + Math.PI * Math.Pow(radius, 2));
         }
 
         private float CalcPerimeter()
         {
-            if (is_triangle_bottom)
+            if (which_bottom == 0)
             {
                 float[] sides = new float[]
                 {
@@ -82,15 +94,21 @@ namespace Figures
                 return p + diags.Sum();
             }
 
-            float side_1 = Math.Abs(points[1][1] - points[0][1]);
-            float side_2 = Math.Abs(points[2][0] - points[1][0]);
-            float diag = CalcRectSquareDiag();
-            return side_1 * 2 + side_2 * 2 + diag * 4;
+            if (which_bottom == 1)
+            {
+                float side_1 = Math.Abs(points[1][1] - points[0][1]);
+                float side_2 = Math.Abs(points[2][0] - points[1][0]);
+                float diag = CalcRectSquareDiag();
+                return side_1 * 2 + side_2 * 2 + diag * 4;
+            }
+
+            return (float)(2 * Math.PI * radius);
+
         }
 
         private float CalcVolume()
         {
-            if (is_triangle_bottom)
+            if (which_bottom == 0)
             {
                 float[] sides = new float[]
                 {
@@ -102,7 +120,9 @@ namespace Figures
                 float s = (float)Math.Sqrt(p * (p-sides[0]) * (p-sides[1]) * (p-sides[2]));
                 return s * height / 3;
             }
-            return (points[1][1] - points[0][1]) * (points[2][0] - points[1][0]) / 3 * height;
+            if (which_bottom == 1) return (points[1][1] - points[0][1]) * (points[2][0] - points[1][0]) / 3 * height;
+
+            return (float)(Math.PI * Math.Pow(radius, 2) * height / 3);
         }
 
         private float[] CalcTriangleDiags()
