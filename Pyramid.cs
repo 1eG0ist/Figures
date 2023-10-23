@@ -1,6 +1,6 @@
 namespace Figures
 {
-    public class Pyramid : IFigure
+    internal class Pyramid : Figure
     {
         private int which_bottom; // 0 - triangle, 1 - square/rectangle, 2 - circle
         private float[][] points;
@@ -41,7 +41,7 @@ namespace Figures
             this.height = height;
         }
 
-        private float CalcSquare()
+        private new float CalcSquare()
         {
             if (which_bottom == 0)
             {
@@ -79,7 +79,7 @@ namespace Figures
             return (float)(Math.PI * l * radius + Math.PI * Math.Pow(radius, 2));
         }
 
-        private float CalcPerimeter()
+        private new float CalcPerimeter()
         {
             if (which_bottom == 0)
             {
@@ -144,7 +144,7 @@ namespace Figures
             return (float)Math.Sqrt(Math.Pow(bottom_diag, 2) + Math.Pow(height, 2));
         }
 
-        public string ShowInfo()
+        public new string ShowInfo()
         {
             return $"Square - {CalcSquare()}, Perimeter - {CalcPerimeter()}, Volume - {CalcVolume()}";
         }

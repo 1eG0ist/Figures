@@ -7,7 +7,7 @@ namespace Figures
      * p1
      */
     
-    public class Triangle : IFigure
+    internal class Triangle : Figure
     {
         private float[][] points = new float[3][];
 
@@ -19,14 +19,14 @@ namespace Figures
             }
         }
         
-        private float CalcSquare()
+        private new float CalcSquare()
         {
             float[] sides = CalcSides();
             float p = CalcPerimeter() / 2;
             return (float)Math.Sqrt(p * (p-sides[0]) * (p-sides[1]) * (p-sides[2]));
         }
 
-        private float CalcPerimeter()
+        private new float CalcPerimeter()
         {
             return CalcSides().Sum();
         }
@@ -42,7 +42,7 @@ namespace Figures
             return sides;
         }
         
-        public string ShowInfo()
+        public new string ShowInfo()
         {
             return $"Perimeter - {CalcPerimeter()}, Square - {CalcSquare()}";
         }

@@ -1,8 +1,8 @@
 namespace Figures
 {
-    public class Square : IFigure
+    internal class Square : Figure
     {
-        private float[][] points = new float[2][];
+        private new float[][] points = new float[2][];
 
         public Square(float[] points)
         {
@@ -12,17 +12,17 @@ namespace Figures
             }
         }
 
-        private float CalcSquare()
+        private new float CalcSquare()
         {
             return (float)Math.Pow(points[1][1] - points[0][1], 2);
         }
 
-        private float CalcPerimeter()
+        private new float CalcPerimeter()
         {
             return (points[1][1] - points[0][1]) * 4;
         }
         
-        public string ShowInfo()
+        public new string ShowInfo()
         {
             return $"Perimeter - {CalcPerimeter()}, Square - {CalcSquare()}";
         }

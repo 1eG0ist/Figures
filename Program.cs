@@ -99,27 +99,20 @@
                             "Enter string with points coords (x y) from left to right by x vector if have triangle bottom " +
                             "and from bottom left to top left to top right to bottom right point if have square bottom, " +
                             "then enter height of pyramid, enter only digits and spaces: ");
-                        // try
-                        // {
-                        //     float[] info = Console.ReadLine().Split(' ').Select(x => float.Parse(x)).ToArray();
-                        //     Console.WriteLine(info.Skip(0).Take(info.Length-1).ToArray()[0]);
-                        //     Console.WriteLine(info[info.Length-1]);
-                        //     pyramid = new Pyramid(info.Skip(0).Take(info.Length-1).ToArray(), info[info.Length-1]);
-                        //     Console.WriteLine(pyramid.ShowInfo());
-                        //     Console.WriteLine("Press any key to continue: ");
-                        //     Console.ReadKey();
-                        // }
-                        // catch
-                        // {
-                        //     Console.WriteLine("Something went wrong! Press any key to continue: ");
-                        //     Console.ReadKey();
-                        // }
-                        float[] info = Console.ReadLine().Split(' ').Select(x => float.Parse(x)).ToArray();
-                        pyramid = new Pyramid(info.Skip(0).Take(info.Length-1).ToArray(), info[info.Length-1]);
-                        Console.WriteLine(pyramid.ShowInfo());
-                        Console.WriteLine("Press any key to continue: ");
-                        Console.ReadKey();
-
+                        try
+                        {
+                            float[] info = Console.ReadLine().Split(' ').Select(x => float.Parse(x)).ToArray();
+                            pyramid = new Pyramid(info.Skip(0).Take(info.Length-1).ToArray(), info[info.Length-1]);
+                            Console.WriteLine(pyramid.ShowInfo());
+                            Console.WriteLine("Press any key to continue: ");
+                            Console.ReadKey();
+                        }
+                        catch
+                        {
+                            Console.WriteLine("Something went wrong! Press any key to continue: ");
+                            Console.ReadKey();
+                        }
+                        
                         break;
                 }
             }

@@ -1,6 +1,6 @@
 namespace Figures
 {
-    public class Circle : IFigure
+    internal class Circle : Figure
     {
         private float radius;
     
@@ -10,17 +10,17 @@ namespace Figures
             Console.WriteLine($"radius - {rad}");
         }
 
-        private float CalcSquare()
+        private new float CalcSquare()
         {
             return (float)(Math.PI * Math.Pow(radius, 2));
         }
 
-        private float CalcPerimeter()
+        private new float CalcPerimeter()
         {
             return (float)(2 * Math.PI * radius);
         }
         
-        public string ShowInfo()
+        public new string ShowInfo()
         {
             return $"Perimeter - {CalcPerimeter()}, Square - {CalcSquare()}";
         }

@@ -8,9 +8,9 @@ namespace Figures
      * p - point in right order
      */
     
-    public class Rectangle : IFigure
+    internal class Rectangle : Figure
     {
-        private float[][] points = new float[4][];
+        private new float[][] points = new float[4][];
 
         public Rectangle(float[] points)
         {
@@ -20,17 +20,17 @@ namespace Figures
             }
         }
 
-        private float CalcSquare()
+        private new float CalcSquare()
         {
             return (points[1][1] - points[0][1]) * (points[2][0] - points[1][0]);
         }
 
-        private float CalcPerimeter()
+        private new float CalcPerimeter()
         {
             return  (points[1][1] - points[0][1] + points[2][0] - points[1][0]) * 2;
         }
 
-        public string ShowInfo()
+        public new string ShowInfo()
         {
             return $"Perimeter - {CalcPerimeter()}, Square - {CalcSquare()}";
         }
